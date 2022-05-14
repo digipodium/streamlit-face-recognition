@@ -34,17 +34,18 @@ if choice == 'Open Camera':
             start_camera(load_face_encodings())
 
 if choice == 'Add Person':
-    if col1.button('Add Person 🧑‍🦰'):
-        col1.markdown('''
-        ### Add a new person
-        - Camera opens in a new window
-        - dont press the cross button on the top right corner
-        - press `'s'` to save the image
-        - press `'q'` to quit
-        ''')
+    col1.markdown('''
+    ### Add a new person
+    - Camera opens in a new window
+    - dont press the cross button on the top right corner
+    - press `'s'` to save the image
+    - press `'q'` to quit
+    ''')
+    name = col1.text_input('Enter Name')
+    designation = col1.text_input('Enter Designation')
+    if col1.button('Add Person 🧑‍🦰') and name and designation:
         with st.spinner('Opening Camera'):
-            time.sleep(2)
-            save_ur_images()
+            save_ur_images(name,designation)
 
 if choice == 'Delete Person':
     content = os.walk('images')
