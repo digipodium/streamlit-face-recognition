@@ -21,4 +21,7 @@ conda install -c conda-forge dlib
 ```
 pip install opencv-contrib-python face-recognition streamlit imutils shutil
 ```
-
+# Run
+```
+streamlit run app.py
+``` 

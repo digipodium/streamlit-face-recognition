@@ -13,15 +13,12 @@ from imutils import paths
 # wide mode
 st.set_page_config(layout="wide")
 st.title('Face Recognition using Artificial Intelligence')
-#load readme
-st.sidebar.markdown('''
-# PERSON FINDER
-''')
+
 with open('readme.md') as f:
     with st.expander("view Instruction to install"):
         st.markdown(f.read())   
-options = ['Open Camera','Add Person','Delete Person']
-col1,col2 = st.columns([2,1])  
+options = ['Open Camera','Add Person','Delete Person','Train Model']
+col1,col2 = st.columns([1,1])  
 col1.header('Output')
 col2.header('Options')
 choice = col2.radio('Choose an option',options)  
@@ -29,12 +26,12 @@ if choice == 'Open Camera':
     if col1.button('Open Camera 🎥'):
         col1.markdown('''
         ### Camera opens in a new window
-        - to close the camera, click on the window and press q
+        - to close the camera, click on the window and press `q`
         - dont press the cross button on the top right corner
         ''')
         with st.spinner('Opening Camera, please wait loading faces...'):
             time.sleep(2)
-            start_camera(save_face_encodings())
+            start_camera(load_face_encodings())
 
 if choice == 'Add Person':
     if col1.button('Add Person 🧑‍🦰'):
@@ -42,8 +39,8 @@ if choice == 'Add Person':
         ### Add a new person
         - Camera opens in a new window
         - dont press the cross button on the top right corner
-        - press 's' to save the image
-        - press 'q' to quit
+        - press `'s'` to save the image
+        - press `'q'` to quit
         ''')
         with st.spinner('Opening Camera'):
             time.sleep(2)
@@ -55,9 +52,15 @@ if choice == 'Delete Person':
         for dir in dirs:
             if col1.button(f'Delete {dir} ❌'):
                 if delete_dir(dir):
-                    st.success(f'{dir} deleted, press R to refresh')
+                    st.success(f'{dir} deleted, press `R` to refresh')
                 else:
                     st.error("person could not be deleted,check admin")
+
+if choice == 'Train Model':
+    if col1.button('Train Model 🧠'):
+        with st.spinner('Training Model'):
+            save_face_encodings(st,stlit=True)
+            st.success('Model Trained')
 
 
     

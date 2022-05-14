@@ -29,7 +29,10 @@ def save_ur_images(cam=0,person="zaid",designation="developer"):
     cv2.destroyAllWindows()
     cap.release()
 
-def save_face_encodings(model='hog'):
+def load_face_encodings():
+    return 'encodings/faces'
+
+def save_face_encodings(st,model='hog',stlit=False):
     
     file_encoding = f'encodings/faces'
     if not os.path.exists('encodings'):
@@ -41,7 +44,10 @@ def save_face_encodings(model='hog'):
     for (i, imagePath) in enumerate(imagePaths):
         # extract the person name from the image path
         name = imagePath.split('\\')[1]
-        print(f'[INFO] processing image {i + 1}/{len(imagePaths)}: {name}')
+        if stlit:
+            st.write(f'[INFO] processing image {i + 1}/{len(imagePaths)}: {name}')
+        else:
+            print(f'[INFO] processing image {i + 1}/{len(imagePaths)}: {name}')
         # print(imagePath,name)
         # load the input image and convert it from BGR (OpenCV ordering) to dlib ordering (RGB)
         image = cv2.imread(imagePath)
