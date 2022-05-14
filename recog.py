@@ -8,7 +8,7 @@ import time
 
 # updated from practice.ipynb
 
-def save_ur_images(cam=0,person="zaid",designation="developer"):
+def save_ur_images(person="zaid",designation="developer"):
     cap = cv2.VideoCapture(0)
     count = 0
     folder = f'images/{person}_{"_".join(designation.split())}'
